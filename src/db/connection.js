@@ -1,8 +1,9 @@
-import pgPromise from 'pg-promise';
-import {env} from "../config/env.js"
+import pkg from 'pg';
+const { Pool } = pkg;
 
-const dbUrl = process.env.DATABASE_URL === undefined ? "postgres://postgres:admin@localhost:5432/pizza" : process.env.DATABASE_URL + "?ssl=true";
+const dbUrl = process.env.DATABASE_URL === undefined ? "postgres://postgres:admin@localhost:5432/pizza" : process.env.DATABASE_URL;
 
-// // Create Database Connection
-const pgp = pgPromise({});
-export const db = pgp(dbUrl);
+export const pool = new Pool({
+    connectionString: dbUrl,
+    ssl: { rejectUnauthorized: false }
+});
