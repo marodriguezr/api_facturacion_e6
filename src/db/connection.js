@@ -9,4 +9,4 @@ const dbName = process.env.DB_NAME || env.parsed.DB_NAME;
 
 // Create Database Connection
 const pgp = pgPromise({});
-export const db = pgp(`postgres://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}`);
+export const db = pgp(process.env.DATABASE_URL || `postgres://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}`);
