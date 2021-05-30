@@ -1,10 +1,7 @@
-import { Router } from "express";
-import * as pizzaController from "../controllers/pizza.controller.js";
+import {Router} from 'express';
+import {module1Router} from "./module1/index.js";
 
 export const routes = Router();
 
-routes.get('/',(req,res) => {
-    res.send('Bienvenido');
-});
-
-routes.get("/pizzas", pizzaController.getAllPizzas);
+routes.use("/module1", module1Router);
+routes.get("/", (req,res) => {res.send("Welcome")})
