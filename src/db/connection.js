@@ -1,9 +1,16 @@
-import pkg from 'pg';
-const { Pool } = pkg;
+import Sequelize from 'sequelize'
 
-const dbUrl = process.env.DATABASE_URL === undefined ? "postgres://postgres:admin@localhost:5432/pizza" : process.env.DATABASE_URL;
+const dbUrl = process.env.DATABASE_URL === undefined ? "postgres://postgres:admin@localhost:5432/api_facturacion_a6" : process.env.DATABASE_URL;
 
-export const pool = new Pool({
-    connectionString: dbUrl,
-    ssl: { rejectUnauthorized: false }
-});
+export const sequelize = new Sequelize(
+    dbUrl,
+    {
+        dialect: 'postgres',
+        "dialectOptions": {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false // <<<<<<< YOU NEED THIS
+            }
+        }
+    }
+)

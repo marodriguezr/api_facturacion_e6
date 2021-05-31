@@ -1,5 +1,5 @@
 {
-  "name": "api_rest_v3",
+  "name": "api_facturacion_e6",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -18,8 +18,9 @@
     "tape": "^5.2.2"
   },
   "dependencies": {
-    "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "pg": "^8.6.0"
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.6.2"
   }
 }

@@ -1,6 +1,8 @@
-import {pool as db} from "../db/connection.js";
+import clients from "../../model/clients.js";
 
-export const getAllPizzas = async (req, res) => {
-    const dbResponse = await db.query(`select * from pizzas p order by p.id desc;`);
-    res.json(dbResponse.rows);    
+export const getAllClients = async (req, res) => {
+    const clientesAll = await clients.findAll();
+    res.json({
+        clientesAll
+    })
 }

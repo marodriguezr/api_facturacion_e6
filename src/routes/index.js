@@ -1,7 +1,7 @@
 import {Router} from 'express';
-import {module1Router} from "./module1/index.js";
+import {facturacionRouter} from "./facturacion/index.js";
 
 export const routes = Router();
 
-routes.use("/module1", module1Router);
-routes.get("/", (req,res) => {res.send("Welcome")})
+routes.use("/facturacion", facturacionRouter);
+routes.get("/", (req,res) => {res.send("Bienvenido")})
