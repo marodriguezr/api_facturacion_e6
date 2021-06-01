@@ -5,7 +5,8 @@ const clients = sequelize.define('clients', {
     cli_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        allowNull: false
+        allowNull: false,
+        autoIncrement:true
     },
     cli_id_card: {
         type: Sequelize.STRING(10),
