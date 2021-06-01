@@ -6,11 +6,6 @@ export const sequelize = new Sequelize(
     dbUrl,
     {
         dialect: 'postgres',
-        "dialectOptions": {
-            ssl: {
-                require: true,
-                rejectUnauthorized: false // <<<<<<< YOU NEED THIS
-            }
-        }
+        
     }
 )
