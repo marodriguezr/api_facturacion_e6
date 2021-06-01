@@ -1,6 +1,9 @@
 import { Router } from "express";
-import {getAllClients} from "../../controllers/module1/controller.js";
+import {getAll_bill_details,createBillDetails, updateBillDetais, deleteBillDetais} from "../../controllers/facturacion/billsDetailsController.js";
 
 export const billsDetailsRouter = Router();
 
-billsDetailsRouter.get('/', getAllClients);
+billsDetailsRouter.get('/', getAll_bill_details);
+billsDetailsRouter.post('/', createBillDetails);
+billsDetailsRouter.put('/', updateBillDetais);
+billsDetailsRouter.delete('/', deleteBillDetais);
