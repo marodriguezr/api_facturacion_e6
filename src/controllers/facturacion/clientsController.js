@@ -49,7 +49,7 @@ export const createNewClients = async (req, res, next) => {
 export const updateAClient = async (req, res, next) => {
     try {
 
-        const cli_id=req.params.cli_id;
+        const cli_id = req.params.cli_id;
 
         //if (!validators.validateIdCard(req.query.cli_id_card)) throw Error("Invalid id card");
         //if (!validators.validateString(req.query.cli_name)) throw Error("Invalid name");
@@ -75,41 +75,40 @@ export const updateAClient = async (req, res, next) => {
             cli_status: cli_status,
             cli_client_type_id: cli_client_type_id
         },
-        
-        {
-            where: {
-                cli_id:cli_id
+
+            {
+                where: {
+                    cli_id: cli_id
+                }
+
             }
 
-        }
-        
         );
 
         console.log(respond)
-        res.send({success:true,cli_id:respond})
-
-
+        res.json({
+            message: `Client ${cli_id} updated successfully `
+        })
     } catch (e) {
         next(e)
     }
 }
 
-export const deleteAClient = async (req, res,next) => {
-
-    
+export const deleteAClient = async (req, res, next) => {
 
     try {
 
-        const cli_id=req.params.cli_id;
+        const cli_id = req.params.cli_id;
 
-        const respond= await clients.destroy({where: {
-            cli_id:cli_id
-        }});
+        await clients.destroy({
+            where: {
+                cli_id: cli_id
+            }
+        });
 
-        console.log(respond);
-        res.send("sucess");
-        
-
+        res.json({
+            message: `Client ${cli_id} deleted successfully `
+        })
     } catch (e) {
         next(e);
     }
