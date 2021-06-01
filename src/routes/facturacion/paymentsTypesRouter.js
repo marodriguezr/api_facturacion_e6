@@ -1,6 +1,9 @@
 import { Router } from "express";
-import {getAllClients} from "../../controllers/module1/controller.js";
+import {getAllPaymentsTypes,createPaymentsType,updatePaymentsType,deletePaymentsType} from "../../controllers/facturacion/paymentsTypesController.js";
 
 export const paymentsTypesRouter = Router();
 
-paymentsTypesRouter.get('/', getAllClients);
+paymentsTypesRouter.get('/', getAllPaymentsTypes)
+paymentsTypesRouter.post('/', createPaymentsType)
+paymentsTypesRouter.put('/', updatePaymentsType)
+paymentsTypesRouter.delete('/', deletePaymentsType)
