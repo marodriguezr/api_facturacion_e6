@@ -13,14 +13,14 @@ export const getAllClients = async (req, res) => {
 
 export const createNewClients = async (req, res, next) => {
     try {
-
-        if (!validators.validateIdCard(req.query.cli_id_card)) throw Error("Invalid id card");
-        if (!validators.validateString(req.query.cli_name)) throw Error("Invalid name");
-        if (!validators.validateString(req.query.cli_born_date)) throw Error("Invalid born date");
-        if (!validators.validateString(req.query.cli_address)) throw Error("Invalid address");
-        //if (!validators.validateEmail(req.query.cli_email)) throw Error("Invalid email");
-        if (!validators.validatePhone(req.query.cli_phone)) throw Error("Invalid phone number");
-        if (!validators.validateStingBoolean(req.query.cli_status)) throw Error("Invalid status");
+        console.log(req.query)
+        // if (!validators.validateIdCard(req.query.cli_id_card)) throw Error("Invalid id card");
+        // if (!validators.validateString(req.query.cli_name)) throw Error("Invalid name");
+        // if (!validators.validateString(req.query.cli_born_date)) throw Error("Invalid born date");
+        // if (!validators.validateString(req.query.cli_address)) throw Error("Invalid address");
+        // //if (!validators.validateEmail(req.query.cli_email)) throw Error("Invalid email");
+        // if (!validators.validatePhone(req.query.cli_phone)) throw Error("Invalid phone number");
+        // if (!validators.validateStingBoolean(req.query.cli_status)) throw Error("Invalid status");
 
         const { cli_id_card, cli_name, cli_born_date, cli_address, cli_email, cli_phone, cli_status, cli_client_type_id } = req.query
 
