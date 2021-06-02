@@ -11,7 +11,11 @@ export const createBillDetails = async (req, res) => {
     const { amount, price, has_iva, bill_header_id, product_id } = req.query
     try {
         const detail = await bill_details.create({
-            
+            bd_amount: amount,
+            bd_price: price,
+            bd_has_iva: has_iva,
+            bd_bill_header_id: bill_header_id,
+            bd_product_id: product_id
         }, { fields: ['bd_amount', 'bd_price', 'bd_has_iva', 'bd_bill_header_id', 'bd_product_id'] });
         if (detail) {
             res.json({
