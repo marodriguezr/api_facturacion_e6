@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 import { sequelize } from "../db/connection.js";
-
+import billdetails from './bill_details.js';
 const bills_headers = sequelize.define('bills_headers', {
     bh_id: {
         type: Sequelize.INTEGER,
@@ -24,5 +24,10 @@ const bills_headers = sequelize.define('bills_headers', {
     timestamps: false,
     freezeTableName: true
 });
+
+//Creando Relacion bill-details
+bills_headers.hasMany(billdetails,{foreignKey:'bd_bill_header_id'})
+//Una bill details solo puede tener  un bill details
+billdetails.belongsTo(bills_headers,{foreignKey:'bd_bill_header_id'})
 
 export default bills_headers

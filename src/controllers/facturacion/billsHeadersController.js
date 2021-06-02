@@ -1,7 +1,9 @@
 import billheaders from "../../model/billsHeaders.js";
-
+import billdetails from '../../model/bill_details.js'
 export const getbillheaders = async (req, res) => {
-    const billheaderAll = await billheaders.findAll();
+    const billheaderAll = await billheaders.findAll({
+        include: [billdetails]
+    });
     res.json({
         billheaderAll
     })
