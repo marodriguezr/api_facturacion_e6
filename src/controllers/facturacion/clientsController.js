@@ -1,5 +1,4 @@
 import clients from "../../model/clients.js"
-import { sequelize } from "../../db/connection.js"
 import * as validators from "../../utilities/validators.js"
 
 
@@ -22,7 +21,7 @@ export const createNewClients = async (req, res, next) => {
         // if (!validators.validatePhone(req.query.cli_phone)) throw Error("Invalid phone number");
         // if (!validators.validateStingBoolean(req.query.cli_status)) throw Error("Invalid status");
 
-        const { cli_id_card, cli_name, cli_born_date, cli_address, cli_email, cli_phone, cli_status, cli_client_type_id } = req.query
+        const { cli_id_card, cli_name, cli_born_date, cli_address, cli_email, cli_phone, cli_status, cli_payment_type_id } = req.query
 
         const cli_born_date2 = Date(cli_born_date)
 
@@ -35,7 +34,7 @@ export const createNewClients = async (req, res, next) => {
             cli_email: cli_email,
             cli_phone: cli_phone,
             cli_status: cli_status,
-            cli_client_type_id: cli_client_type_id
+            cli_payment_type_id: cli_payment_type_id
         });
 
 
@@ -59,7 +58,7 @@ export const updateAClient = async (req, res, next) => {
         //if (!validators.validatePhone(req.query.cli_phone)) throw Error("Invalid phone number");
         //if (!validators.validateStingBoolean(req.query.cli_status)) throw Error("Invalid status");
 
-        const { cli_id_card, cli_name, cli_born_date, cli_address, cli_email, cli_phone, cli_status, cli_client_type_id } = req.query
+        const { cli_id_card, cli_name, cli_born_date, cli_address, cli_email, cli_phone, cli_status, cli_payment_type_id } = req.query
 
         const cli_born_date2 = Date(cli_born_date)
 
@@ -73,7 +72,7 @@ export const updateAClient = async (req, res, next) => {
             cli_email: cli_email,
             cli_phone: cli_phone,
             cli_status: cli_status,
-            cli_client_type_id: cli_client_type_id
+            cli_payment_type_id: cli_payment_type_id
         },
 
             {

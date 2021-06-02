@@ -36,7 +36,7 @@ const clients = sequelize.define('clients', {
         type: Sequelize.BOOLEAN,
         allowNull: false
     },
-    cli_client_type_id: {
+    cli_payment_type_id: {
         type: Sequelize.INTEGER
     },
 }, {
