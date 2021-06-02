@@ -72,5 +72,3 @@ export const deletePaymentsType = async (req, res) => {
         })
     }
 }
-
-
