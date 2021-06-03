@@ -4,4 +4,4 @@ import {facturacionRouter} from "./facturacion/index.js";
 export const routes = Router();
 
 routes.use("/facturacion", facturacionRouter);
-routes.get("/", (req,res) => {res.send("Bienvenido")})
+routes.get("/", (req,res) => {res.send("Bienvenido/a a la api de facturación.")})
