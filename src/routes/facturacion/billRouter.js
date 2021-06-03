@@ -5,5 +5,5 @@ import {getbillbyProductId} from "../../controllers/facturacion/billsController.
 export const billsRouter = Router();
 
 billsRouter.get('/', (req, res) => {res.send("Bills")});
-billsRouter.get('/getBillsByPaymentIdAndClientId', getbillbyPayments);
-billsRouter.get('/getBillsByPaymentIdAndProductId', getbillbyProductId);
+billsRouter.get('/byPaymentAndClientId', getbillbyPayments);
+billsRouter.get('/byProductId', getbillbyProductId);
