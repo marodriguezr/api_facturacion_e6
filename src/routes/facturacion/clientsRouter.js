@@ -3,7 +3,7 @@ import {getAllClients,createNewClients,updateAClient,deleteAClient} from "../../
 
 export const clientsRouter = Router();
 
-clientsRouter.get('/ConsultaClientes', getAllClients);
+clientsRouter.get('/getAll', getAllClients);
 clientsRouter.post('/crearNuevoCliente', createNewClients);
 clientsRouter.put('/actualizarCliente/:cli_id', updateAClient);
 clientsRouter.delete('/EliminarCliente/:cli_id',deleteAClient);
