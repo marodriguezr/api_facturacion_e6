@@ -1,4 +1,6 @@
 import billheaders from "../../model/billsHeaders.js";
+import clients from "../../model/clients.js";
+
 export const getbillheaders = async (req, res) => {
     const billheaderAll = await billheaders.findAll();
     res.json({
@@ -17,19 +19,23 @@ export const getbillheadersbyid = async (req, res) => {
     })
 }
 
-export const createbillheaders = async (req, res) => {
-    const { payment_type_id, client_id, bh_total, bh_subtotal, bh_iva } = req.query
-    let date = new Date();
-    let last = await billheaders.findAll({
-        limit: 1,
-        order: [['bh_id', 'DESC']]
-    });
-
-
-    last = last[0].dataValues.bh_id === undefined ? "FACT-00000001" : `FACT-${"0".repeat(8 - last[0].dataValues.bh_id.toString().length) + last[0].dataValues.bh_id}`;
-    
-
+export const createbillheaders = async (req, res, next) => {
     try {
+        const { payment_type_id, client_id, bh_total, bh_subtotal, bh_iva } = req.query
+        let date = new Date();
+        let last = await billheaders.findAll({
+            limit: 1,
+            order: [['bh_id', 'DESC']]
+        });
+
+
+        last = last[0].dataValues.bh_id === undefined ? "FACT-00000001" : `FACT-${"0".repeat(8 - (last[0].dataValues.bh_id + 1).toString().length) + (last[0].dataValues.bh_id + 1)}`;
+
+        const client = await clients.findOne({ where: { cli_id: client_id } });
+
+        if (client.dataValues === undefined) throw Error("Invalid client id");
+        if (client.dataValues.cli_payment_type_id != payment_type_id) throw Error("Invalid payment id, this client only accepts the payment: " + client.dataValues.cli_payment_type_id);
+
         let newbillheader = await billheaders.create({
             bh_date: date,
             payment_type_id,
@@ -49,15 +55,12 @@ export const createbillheaders = async (req, res) => {
         }
     } catch (error) {
         console.log(error)
-        res.status(500).json({
-            message: 'Algo salio mal',
-            dat: {}
-        })
+        next(error.message)
     }
 }
 
 export const updatebillheaders = async (req, res) => {
-    const { bh_id, payment_type_id, client_id } = req.query
+    const { bh_id, payment_type_id, client_id, bh_total, bh_subtotal, bh_iva } = req.query
     const billheaderUp = await billheaders.findOne({
         attributes: ['bh_id', 'payment_type_id', 'client_id'],
         where: {
@@ -67,7 +70,10 @@ export const updatebillheaders = async (req, res) => {
     try {
         await billheaderUp.update({
             payment_type_id,
-            client_id
+            client_id,
+            bh_total,
+            bh_subtotal,
+            bh_iva
         })
         return res.json({
             message: 'bill header update',
