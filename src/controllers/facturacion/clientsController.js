@@ -1,9 +1,12 @@
 import clients from "../../model/clients.js"
 import * as validators from "../../utilities/validators.js"
+import paymentsTypes from "../../model/payments_types.js"
 
 
 export const getAllClients = async (req, res) => {
-    const clientsAll = await clients.findAll();
+    const clientsAll = await clients.findAll({
+        include:paymentsTypes
+    });
     res.json({
         clientsAll
     })
