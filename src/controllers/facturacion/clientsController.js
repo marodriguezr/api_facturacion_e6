@@ -5,7 +5,8 @@ import paymentsTypes from "../../model/payments_types.js"
 
 export const getAllClients = async (req, res) => {
     const clientsAll = await clients.findAll({
-        include:paymentsTypes
+        include:paymentsTypes,
+        order: [['cli_id', 'ASC']]
     });
     res.json({
         clientsAll
