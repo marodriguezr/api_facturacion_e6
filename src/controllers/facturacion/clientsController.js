@@ -27,7 +27,7 @@ export const createNewClients = async (req, res, next) => {
 
         const { cli_id_card, cli_name, cli_born_date, cli_address, cli_email, cli_phone, cli_status, cli_payment_type_id } = req.query
 
-        const cli_born_date2 = Date(cli_born_date)
+        const cli_born_date2 = new Date(cli_born_date)
 
 
         const respond = await clients.create({
