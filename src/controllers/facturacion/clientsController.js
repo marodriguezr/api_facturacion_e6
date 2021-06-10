@@ -24,6 +24,17 @@ export const getAllClientsByActivos = async (req, res) => {
         clientsAll
     })
 }
+export const getAllClientsById = async (req, res) => {
+    const cli_id = req.params.cli_id;
+    const clientsbyId = await clients.findOne({       
+        where: {
+            cli_id
+        }
+    });
+    res.json({
+        clientsbyId
+    })
+}
 
 export const createNewClients = async (req, res, next) => {
     try {
