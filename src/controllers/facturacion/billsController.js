@@ -2,6 +2,7 @@ import billheaders from "../../model/billsHeaders.js";
 import billdetails from "../../model/bill_details.js";
 import paymentsTypes from "../../model/payments_types.js";
 import clients from "../../model/clients.js";
+import bills_headers from "../../model/billsHeaders.js";
 
 export const getbillbyPayments = async (req, res) => {
     const { pt_id, cli_id_card } = req.query;
@@ -39,5 +40,25 @@ export const getCurrentWritableBillCode = async (req, res) => {
 
     last = last.length === 0 ? "FACT-00000001" : `FACT-${"0".repeat(8 - (last[0].dataValues.bh_id + 1).toString().length) + (last[0].dataValues.bh_id + 1)}`;
 
-    res.json({last: last});
+    res.json({ last: last });
+};
+
+export const getLastBill = async (req, res) => {
+    let last = await billheaders.findAll({
+        limit: 1,
+        order: [['bh_id', 'DESC']],
+        include: [billdetails]
+    });
+
+    res.json({ last });
+};
+
+export const getById = async (req, res) => {
+    const { bh_id } = req.query;
+    const bill = await billheaders.findOne({
+        include: [billdetails], where: { bh_id: bh_id }
+    });
+    res.json({
+        bill
+    })
 };
