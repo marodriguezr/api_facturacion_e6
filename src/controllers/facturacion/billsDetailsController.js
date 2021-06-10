@@ -27,7 +27,6 @@ export const createBillDetails = async (req, res) => {
 
         if (product.pro_stock < amount) throw Error("Specified amount exceed the avaliability");
 
-
         const detail = await bill_details.create({
             bd_amount: amount,
             bd_price: price,
