@@ -30,3 +30,14 @@ export const getbillbyProductId = async (req, res) => {
         billPayments
     })
 }
+
+export const getCurrentWritableBillCode = async (req, res) => {
+    let last = await billheaders.findAll({
+        limit: 1,
+        order: [['bh_id', 'DESC']]
+    });
+
+    last = last.length === 0 ? "FACT-00000001" : `FACT-${"0".repeat(8 - (last[0].dataValues.bh_id + 1).toString().length) + (last[0].dataValues.bh_id + 1)}`;
+
+    res.json({last: last});
+};

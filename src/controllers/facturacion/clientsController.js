@@ -12,7 +12,18 @@ export const getAllClients = async (req, res) => {
         clientsAll
     })
 }
-
+export const getAllClientsByActivos = async (req, res) => {
+    const clientsAll = await clients.findAll({
+        include:paymentsTypes,
+        order: [['cli_id', 'ASC']],
+        where: {
+            cli_status:true
+        }
+    });
+    res.json({
+        clientsAll
+    })
+}
 
 export const createNewClients = async (req, res, next) => {
     try {
