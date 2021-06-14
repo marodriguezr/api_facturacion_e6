@@ -29,17 +29,17 @@ export const createbillheaders = async (req, res, next) => {
             order: [['bh_id', 'DESC']]
         });
 
-        
+
         last = last.length === 0 ? "FACT-00000001" : `FACT-${"0".repeat(8 - (last[0].dataValues.bh_id + 1).toString().length) + (last[0].dataValues.bh_id + 1)}`;
 
         const client = await clients.findOne({ where: { cli_id: client_id } });
 
         if (client.dataValues === undefined) throw Error("Invalid client id");
 
-        const paymentType = await paymentTypes.findOne({where: {pt_id: client.cli_payment_type_id}});
-        
-        if (!(paymentType.dataValues.pt_value.trim().toLowerCase() === ("credito" ||"crédito"))) throw Error("El cliente solo acepta el tipo de pago Contado");
-        
+        const paymentType = await paymentTypes.findOne({ where: { pt_id: client.cli_payment_type_id } });
+
+        if (!(paymentType.dataValues.pt_value.trim().toLowerCase() === "credito" || paymentType.dataValues.pt_value.trim().toLowerCase() === "crédito")) throw Error("El cliente solo acepta el tipo de pago Contado");
+
         // if (client.dataValues.cli_payment_type_id != payment_type_id) throw Error("Invalid payment id, this client only accepts the payment: " + client.dataValues.cli_payment_type_id);
 
         let newbillheader = await billheaders.create({
