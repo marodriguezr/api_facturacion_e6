@@ -49,7 +49,8 @@ export const createbillheaders = async (req, res, next) => {
             bh_total: bh_total,
             bh_subtotal: bh_subtotal,
             bh_iva,
-            bh_bill_code: last
+            bh_bill_code: last,
+            bh_status: true
         }, {
             fields: ['bh_date', 'payment_type_id', 'client_id', "bh_total", "bh_subtotal", "bh_iva", "bh_bill_code"]
         })
@@ -66,20 +67,22 @@ export const createbillheaders = async (req, res, next) => {
 }
 
 export const updatebillheaders = async (req, res) => {
-    const { bh_id, payment_type_id, client_id, bh_total, bh_subtotal, bh_iva } = req.query
-    const billheaderUp = await billheaders.findOne({
-        attributes: ['bh_id', 'payment_type_id', 'client_id'],
-        where: {
-            bh_id
-        }
-    })
     try {
+        const { bh_id, payment_type_id, client_id, bh_total, bh_subtotal, bh_iva, bh_status } = req.query
+        const billheaderUp = await billheaders.findOne({
+            attributes: ['bh_id', 'payment_type_id', 'client_id'],
+            where: {
+                bh_id
+            }
+        })
+
         await billheaderUp.update({
             payment_type_id,
             client_id,
             bh_total,
             bh_subtotal,
-            bh_iva
+            bh_iva,
+            bh_status
         })
         return res.json({
             message: 'bill header update',
@@ -89,7 +92,8 @@ export const updatebillheaders = async (req, res) => {
         console.log(error)
         res.status(500).json({
             message: 'Algo salio mal',
-            dat: {}
+            dat: {},
+            error: error.message
         })
     }
 
