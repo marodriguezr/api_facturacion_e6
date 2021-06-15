@@ -4,6 +4,7 @@ import { getbillbyProductId } from "../../controllers/facturacion/billsControlle
 import { getCurrentWritableBillCode } from "../../controllers/facturacion/billsController.js";
 import { getLastBill } from "../../controllers/facturacion/billsController.js";
 import { getById } from "../../controllers/facturacion/billsController.js";
+import { getAllBills } from "../../controllers/facturacion/billsController.js";
 
 export const billsRouter = Router();
 
@@ -14,3 +15,4 @@ billsRouter.get('/current', getbillbyProductId);
 billsRouter.get('/currentWritableBillCode', getCurrentWritableBillCode)
 billsRouter.get('/last', getLastBill);
 billsRouter.get('/byId', getById);
+billsRouter.get('/all', getAllBills);
