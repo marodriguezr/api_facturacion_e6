@@ -36,7 +36,10 @@ const bills_headers = sequelize.define('bills_headers', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-
+    bh_status: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+    }
 }, {
     timestamps: false,
     freezeTableName: true

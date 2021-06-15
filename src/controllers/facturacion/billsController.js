@@ -2,7 +2,6 @@ import billheaders from "../../model/billsHeaders.js";
 import billdetails from "../../model/bill_details.js";
 import paymentsTypes from "../../model/payments_types.js";
 import clients from "../../model/clients.js";
-import bills_headers from "../../model/billsHeaders.js";
 
 export const getbillbyPayments = async (req, res) => {
     const { pt_id, cli_id_card } = req.query;
@@ -62,3 +61,12 @@ export const getById = async (req, res) => {
         bill
     })
 };
+
+export const getAllBills = async (req, res) => {
+    const billPayments = await billheaders.findAll({
+        include: [billdetails]
+    });
+    res.json({
+        billPayments
+    })
+}
